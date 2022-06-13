@@ -7,7 +7,7 @@ class StaffList extends Component {
     super(props);
     this.state = {
       selectedStaff: null,
-      columDefault: "col-12 col-md-6 col-lg-4 mt-3",
+      columDefault: "col-12 col-sm-6 col-md-4 mt-3",
     };
   }
   onStaffSelect(staff) {
@@ -22,7 +22,7 @@ class StaffList extends Component {
 
   renderStaff(staff) {
     if (staff != null) {
-      console.log("abc");
+      //console.log("abc");
 
       return (
         <div className="col-12">
@@ -49,11 +49,11 @@ class StaffList extends Component {
   }
 
   render() {
-    console.log(this.props.staffs);
+    //console.log(this.props.staffs);
 
     const staffList = this.props.staffs.map((staff) => {
       return (
-        <div className="col-12 col-sm-6 col-md-4">
+        <div className={this.state.columDefault}>
           <Card key={staff.id} onClick={() => this.onStaffSelect(staff)}>
             <CardBody>
               <CardTitle>{staff.name}</CardTitle>
@@ -65,6 +65,38 @@ class StaffList extends Component {
 
     return (
       <div className="container">
+        <div className="row m-3">
+          <button
+            onClick={() => this.onColumSelect("col-md-12 mt-2")}
+            className="btn btn-primary col-2 m-1"
+          >
+            1 Cột
+          </button>
+          <button
+            onClick={() => this.onColumSelect("col-md-6 mt-2")}
+            className="btn btn-secondary col-2 m-1"
+          >
+            2 Cột
+          </button>
+          <button
+            onClick={() => this.onColumSelect("col-md-4 mt-2")}
+            className="btn btn-success col-2 m-1"
+          >
+            3 Cột
+          </button>
+          <button
+            onClick={() => this.onColumSelect("col-md-3 mt-2")}
+            className="btn btn-warning col-2 m-1"
+          >
+            4 Cột
+          </button>
+          <button
+            onClick={() => this.onColumSelect("col-md-2 mt-2")}
+            className="btn btn-info col-2 m-1"
+          >
+            6 Cột
+          </button>
+        </div>
         <div className="row">{staffList}</div>
         <div>Bấm vào tên nhân viên để xem thông tin</div>
         <div className="row">
