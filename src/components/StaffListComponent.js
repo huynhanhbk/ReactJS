@@ -98,7 +98,9 @@ class StaffList extends Component {
           </button>
         </div>
         <div className="row">{staffList}</div>
-        <div>Bấm vào tên nhân viên để xem thông tin</div>
+        <div className="row font-weight-bold">
+          Bấm vào tên nhân viên để xem thông tin
+        </div>
         <div className="row">
           <div className="col-12 col-md-5 m-1">
             {this.renderStaff(this.state.selectedStaff)}
