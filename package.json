@@ -1,5 +1,5 @@
 {
-  "name": "lab_04_1",
+  "name": "lab_05",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "react-redux": "5.0.7",
     "react-redux-form": "1.16.8",
     "react-router-dom": "4.2.2",
+    "react-script": "^2.0.5",
     "react-scripts": "1.1.4",
     "react-transition-group": "2.3.0",
     "reactstrap": "5.0.0",
