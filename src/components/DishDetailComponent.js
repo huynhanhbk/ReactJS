@@ -41,7 +41,6 @@ function RenderComments({ comments }) {
       </div>
     );
   }
-  console.log(comments);
 }
 
 function DishDetail(props) {
