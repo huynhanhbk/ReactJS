@@ -43,7 +43,7 @@ class Main extends Component {
 
 export default Main;
 
-/*
+/* //--Lab 4.1
 import React, { Component } from "react";
 import Menu from "./MenuComponent";
 import { Navbar, NavbarBrand } from "reactstrap";

@@ -62,7 +62,7 @@ class DishDetail extends Component {
 
 export default DishDetail;
 
-/*
+/* //--Lab 4.1
 import React, { Component } from "react";
 import { Card, CardImg, CardTitle, CardBody, CardText } from "reactstrap";
 import dateFormat from "dateformat";
