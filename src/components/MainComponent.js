@@ -3,6 +3,7 @@ import Menu from "./MenuComponent";
 import Header from "./HeaderComponent";
 import { DISHES } from "../shared/dishes";
 import DishDetail from "./DishDetailComponent";
+import Footer from "./FooterComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Main extends Component {
             )[0]
           }
         />
+        <Footer />
       </div>
     );
   }
