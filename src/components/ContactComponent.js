@@ -21,7 +21,7 @@ class Contact extends Component {
               <br />
               <i className="fa fa-fax"></i>: +852 8765 4321
               <br />
-              <i className="fa fa-envelope"></i>:{" "}
+              <i className="fa fa-envelope"></i>:
               <a href="mailto:confusion@food.net">confusion@food.net</a>
             </address>
           </div>
