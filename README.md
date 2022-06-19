@@ -1,1 +1,1 @@
-Sample cho toàn bộ lab và project trong môn học Lập Trình Web Front-End với React với đầy đủ dependency
+Branch asm2: RJS101x_Assignment2_huynhlaFX16319@funix.edu.vn
