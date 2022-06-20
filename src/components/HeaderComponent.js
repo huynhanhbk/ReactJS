@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Nav,
   Navbar,
@@ -6,7 +6,6 @@ import {
   NavbarToggler,
   NavItem,
   Collapse,
-  Jumbotron,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
@@ -32,17 +31,17 @@ function Header() {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/home">
+                <NavLink className="nav-link" to="/nhanvien">
                   <span className="fa fa-user-circle fa-lg"></span> Nhân Viên
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/aboutus">
+                <NavLink className="nav-link" to="/phongban">
                   <span className="fa fa-address-card fa-lg"></span> Phòng Ban
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/menu">
+                <NavLink className="nav-link" to="/bangluong">
                   <span className="fa fa-money fa-lg"></span> Bảng Lương
                 </NavLink>
               </NavItem>

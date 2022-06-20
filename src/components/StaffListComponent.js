@@ -1,16 +1,8 @@
-import React, { Component } from "react";
-import {
-  Card,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardImg,
-  CardImgOverlay,
-} from "reactstrap";
-import dateFormat from "dateformat";
+import React from "react";
+import { Card, CardImg } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderMenuStaffs({ staff }) {
+function RenderMenuStaffs({ staff, onClick }) {
   return (
     <Card>
       <Link to={`/nhanvien/${staff.id}`}>
