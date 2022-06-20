@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import { DEPARTMENTS } from "../shared/staffs";
 import { STAFFS } from "../shared/staffs";
 import StaffList from "./StaffListComponent";
+import Header from "./HeaderComponent";
+import Footer from "./FooterComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -14,9 +16,16 @@ class Main extends Component {
   }
   render() {
     return (
-      <Switch>
-        <Route path="/staff" component={StaffList} />
-      </Switch>
+      <div>
+        <Header />
+        <Switch>
+          <Route
+            path="/nhanvien"
+            component={() => <StaffList staffs={this.state.staffs} />}
+          />
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 }
