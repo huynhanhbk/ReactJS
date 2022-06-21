@@ -19,10 +19,10 @@ function RenderStaff({ staff }) {
         <Card>
           <CardBody>
             <div className="row">
-              <div className="col-3">
+              <div className="col-12 col-sm-4 col-md-3">
                 <CardImg width="100%" src={staff.image} alt={staff.name} />
               </div>
-              <div className="col-9">
+              <div className="col-12 col-sm-8 col-md-9">
                 <CardTitle>Họ và tên: {staff.name}</CardTitle>
                 <CardText>
                   Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}

@@ -7,7 +7,7 @@ function RenderMenuStaffs({ staff, onClick }) {
     <Card>
       <Link to={`/nhanvien/${staff.id}`}>
         <CardImg width="100%" src={staff.image} alt="" />
-        <p>{staff.name}</p>
+        <p className="text-center text-dark">{staff.name}</p>
       </Link>
     </Card>
   );
@@ -16,7 +16,7 @@ function RenderMenuStaffs({ staff, onClick }) {
 function StaffList(props) {
   const danhsachnv = props.staffs.map((staff) => {
     return (
-      <div key={staff.id} className="col-12 col-md-2">
+      <div key={staff.id} className="col-6 col-sm-4 col-md-2 mt-4">
         <RenderMenuStaffs staff={staff} />
       </div>
     );
@@ -24,9 +24,11 @@ function StaffList(props) {
   return (
     <div className="container">
       <div className="row">
-        <h3>Nhân Viên</h3>
+        <h4>Danh sách Nhân Viên</h4>
       </div>
+      <hr />
       <div className="row">{danhsachnv}</div>
+      <br></br>
     </div>
   );
 }

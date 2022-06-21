@@ -13,27 +13,29 @@ function Footer() {
                 <Link to="/home">Trang chủ</Link>
               </li>
               <li>
-                <Link to="/aboutus">Nhân viên</Link>
+                <Link to="/nhanvien">Nhân viên</Link>
               </li>
               <li>
-                <Link to="/menu">Phòng ban</Link>
+                <Link to="/phongban">Phòng ban</Link>
               </li>
               <li>
-                <Link to="/contact">Bảng lương</Link>
+                <Link to="/bangluong">Bảng lương</Link>
               </li>
             </ul>
           </div>
           <div className="col-7 col-sm-5">
             <h5>Về chúng tôi</h5>
             <address>
-              Quang Nam, Viet Nam
+              Tầng 0 tòa nhà FPT
               <br />
-              <i className="fa fa-phone fa-lg"></i>: +84 387 787 409
+              Phố Duy Tân, Cầu Giấy
+              <br />
+              Hà Nội
+              <br />
+              <i className="fa fa-phone fa-lg"></i>: +84 78 231 3602
               <br />
               <i className="fa fa-envelope fa-lg"></i>:{" "}
-              <a href="mailto:huynhanhbk.92@gmail.com">
-                huynhanhbk.92@gmail.com
-              </a>
+              <a href="mailto:info@funix.edu.vn">info@funix.edu.vn</a>
             </address>
           </div>
           <div className="col-12 col-sm-4 align-self-center">
@@ -76,7 +78,7 @@ function Footer() {
         </div>
         <div className="row justify-content-center">
           <div className="col-auto">
-            <p>Copyright 2022 by HuynhLA_FX16319</p>
+            <p>Copyright by HuynhLA_FX16319</p>
           </div>
         </div>
       </div>

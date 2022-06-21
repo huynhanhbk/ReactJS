@@ -6,6 +6,7 @@ import StaffList from "./StaffListComponent";
 import StaffDetail from "./StaffDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
+import Department from "./DepartmentComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -39,6 +40,13 @@ class Main extends Component {
             component={() => <StaffList staffs={this.state.staffs} />}
           />
           <Route path="/nhanvien/:staffId" component={StaffWithId} />
+          <Route
+            exact
+            path="/phongban"
+            component={() => (
+              <Department departments={this.state.departments} />
+            )}
+          />
         </Switch>
         <Footer />
       </div>
