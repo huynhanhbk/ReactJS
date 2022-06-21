@@ -26,7 +26,7 @@ function Header() {
           <Collapse navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink className="nav-link" to="/home">
+                <NavLink className="nav-link" to="/trangchu">
                   <span className="fa fa-home fa-lg"></span> Trang Chủ
                 </NavLink>
               </NavItem>
