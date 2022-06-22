@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, CardImg } from "reactstrap";
 import { Link } from "react-router-dom";
-// import TextField from "@material-ui/core/TextField";
+import TextField from "@material-ui/core/TextField";
 
 function RenderMenuStaffs({ staff, onClick }) {
   return (
@@ -54,14 +54,20 @@ class StaffList extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-3">
-            <h4>Danh sách Nhân Viên</h4>
+            <h4>Danh Sách Nhân Viên</h4>
           </div>
           <div className="text-right col-12 col-md-9">
-            <input
+            {/* <input
               type="text"
               className="input mt-2"
               onChange={this.handleInputChange}
-              placeholder="Tim kiem"
+              placeholder="Nhập tên nhân viên để tìm kiếm"
+            /> */}
+
+            <TextField
+              label="Tìm nhân viên"
+              variant="filled"
+              onChange={this.handleInputChange}
             />
           </div>
         </div>
