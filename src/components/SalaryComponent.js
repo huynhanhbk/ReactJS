@@ -10,7 +10,6 @@ import {
 } from "reactstrap";
 
 function RenderSalary({ staff }) {
-  console.log(staff);
   if (staff != null) {
     return (
       <div>
@@ -89,6 +88,7 @@ class Salary extends Component {
       </div>
     );
   }
+
   componentDidMount() {
     this.setState({
       sortArray: this.props.staffs,

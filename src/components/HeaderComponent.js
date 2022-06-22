@@ -15,7 +15,7 @@ function Header() {
       <Navbar dark expand="md">
         <div className="container">
           <NavbarToggler />
-          <NavbarBrand className="mr-auto" href="/">
+          <NavbarBrand className="mr-5" href="/">
             <img
               src="assets/images/logofunix.jpg"
               height="40"
