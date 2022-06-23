@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { DEPARTMENTS } from "../shared/staffs";
 import { STAFFS } from "../shared/staffs";
 import StaffList from "./StaffListComponent";
@@ -54,6 +54,7 @@ class Main extends Component {
             path="/bangluong"
             component={() => <Salary staffs={this.state.staffs} />}
           />
+          <Redirect to="/trangchu" />
         </Switch>
         <Footer />
       </div>

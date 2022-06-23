@@ -53,7 +53,7 @@ function StaffDetail(props) {
         <div className="row">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/nhanvien">Menu</Link>
+              <Link to="/nhanvien">Nhân Viên</Link>
             </BreadcrumbItem>
             <BreadcrumbItem active>{props.nv.name}</BreadcrumbItem>
           </Breadcrumb>

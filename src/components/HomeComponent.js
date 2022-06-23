@@ -16,7 +16,7 @@ function Home() {
                 <p>Bài tập số: Assignment 2</p>
                 <p>Tên dự án: React Router và SPA</p>
                 <p>Tác giả: Vũ Ngọc Trung</p>
-                <p>Thực hành: Lê Anh Huỳnh</p>
+                <p>Người thực hiện: Lê Anh Huỳnh</p>
               </div>
             </div>
           </div>
