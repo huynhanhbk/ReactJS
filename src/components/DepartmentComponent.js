@@ -24,7 +24,7 @@ function Department(props) {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row mt-3 ml-1">
         <h3>Danh Sách Phòng Ban</h3>
       </div>
       <hr />
