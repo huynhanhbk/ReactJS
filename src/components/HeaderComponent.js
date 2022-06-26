@@ -43,7 +43,7 @@ class Header extends Component {
   }
 
   handleLogin(event) {
-    this, this.toggleModal();
+    this.toggleModal();
     alert(
       "Username: " + this.username.value + "Password: " + this.password.value
     );
