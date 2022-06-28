@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
+import Comments from "./CommentForm";
 
 function RenderDish({ dish }) {
   if (dish != null) {
@@ -29,7 +30,7 @@ function RenderDish({ dish }) {
   }
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, postComment, dishId }) {
   if (comments != null) {
     return (
       <div className="col-12 col-md-5 m-1">
@@ -47,6 +48,7 @@ function RenderComments({ comments }) {
             );
           })}
         </ul>
+        <Comments dishId={dishId} postComment={postComment} />
       </div>
     );
   }
