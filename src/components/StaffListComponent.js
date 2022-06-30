@@ -19,6 +19,7 @@ class StaffList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      errors: "",
       filterArray: [],
       isModalOpen: false,
       name: "",
@@ -97,7 +98,6 @@ class StaffList extends Component {
   };
 
   handleSubmit(event) {
-    this.validate();
     const newStaff = {
       name: this.state.name,
       doB: this.state.doB,
@@ -110,7 +110,6 @@ class StaffList extends Component {
       salary: this.state.salary,
     };
     this.props.onAdd(newStaff);
-    event.preventDefault();
   }
 
   validate(
