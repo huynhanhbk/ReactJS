@@ -15,6 +15,18 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
+//Hàm hiển thị nhân
+function RenderMenuStaffs({ staff, onClick }) {
+  return (
+    <Card>
+      <Link to={`/nhanvien/${staff.id}`}>
+        <CardImg width="100%" src={staff.image} alt="" />
+        <p className="text-center text-dark">{staff.name}</p>
+      </Link>
+    </Card>
+  );
+}
+
 class StaffList extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +41,6 @@ class StaffList extends Component {
       salaryScale: "",
       annualLeave: "",
       overTime: "",
-      salary: 3000000,
       image: "/assets/images/alberto.png",
       touched: {
         name: false,
@@ -103,7 +114,7 @@ class StaffList extends Component {
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
       startDate: this.state.startDate,
-      department: this.state.department,
+      department: { name: this.state.department },
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       image: this.state.image,
@@ -181,7 +192,7 @@ class StaffList extends Component {
           <div className="col-12 col-md-6 mt-3">
             <div className="row">
               <div className="col-8 col-md-8">
-                <h4>Danh Sách Nhân Viên</h4>
+                <h4>Nhân Viên Cơ Bản</h4>
               </div>
               <div className="col-4 col-md-4">
                 <Button onClick={this.toggleModal}>+</Button>
@@ -266,11 +277,11 @@ class StaffList extends Component {
                             onChange={this.handleInputChange}
                             //onChange={this.onChangeDeparment}
                           >
-                            <option value="sale">Sale</option>
-                            <option value="hr">HR</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="it">IT</option>
-                            <option value="finance">Finance</option>
+                            <option>Sale</option>
+                            <option>HR</option>
+                            <option>Marketing</option>
+                            <option>IT</option>
+                            <option>Finance</option>
                           </Input>
                           <FormFeedback>{errors.department}</FormFeedback>
                         </Col>
@@ -381,14 +392,3 @@ class StaffList extends Component {
 }
 
 export default StaffList;
-
-function RenderMenuStaffs({ staff, onClick }) {
-  return (
-    <Card>
-      <Link to={`/nhanvien/${staff.id}`}>
-        <CardImg width="100%" src={staff.image} alt="" />
-        <p className="text-center text-dark">{staff.name}</p>
-      </Link>
-    </Card>
-  );
-}
