@@ -28,7 +28,7 @@ class StaffList extends Component {
       salaryScale: "",
       annualLeave: "",
       overTime: "",
-      salary: "",
+      salary: 3000000,
       image: "/assets/images/alberto.png",
       touched: {
         name: false,
@@ -83,7 +83,7 @@ class StaffList extends Component {
 
   handleInputChange(event) {
     const target = event.target;
-    const value = target.type === "select" ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: value,
@@ -97,6 +97,7 @@ class StaffList extends Component {
   };
 
   handleSubmit(event) {
+    this.validate();
     const newStaff = {
       name: this.state.name,
       doB: this.state.doB,
@@ -106,8 +107,10 @@ class StaffList extends Component {
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       image: this.state.image,
+      salary: this.state.salary,
     };
     this.props.onAdd(newStaff);
+    event.preventDefault();
   }
 
   validate(
@@ -138,6 +141,8 @@ class StaffList extends Component {
       errors.startDate = "Ngày vào công ty không được để trống!";
     if (this.state.touched.salaryScale && salaryScale.length === 0)
       errors.salaryScale = "Hệ số lương không được để trống";
+    if (this.state.touched.department && department.length === 0)
+      errors.department = "Phòng ban không được để trống!";
 
     const reg = /^\d+$/;
     if (this.state.touched.annualLeave && annualLeave.length === 0)
@@ -177,7 +182,7 @@ class StaffList extends Component {
           <div className="col-12 col-md-6 mt-3">
             <div className="row">
               <div className="col-8 col-md-8">
-                <h4>Nhân Viên</h4>
+                <h4>Danh Sách Nhân Viên</h4>
               </div>
               <div className="col-4 col-md-4">
                 <Button onClick={this.toggleModal}>+</Button>
@@ -190,7 +195,7 @@ class StaffList extends Component {
                   </ModalHeader>
                   <ModalBody>
                     <Form onSubmit={this.handleSubmit}>
-                      <FormGroup row>
+                      <FormGroup className="form-group row">
                         <Label htmlFor="name" md={4}>
                           Tên
                         </Label>
@@ -200,6 +205,7 @@ class StaffList extends Component {
                             id="name"
                             name="name"
                             placeholder="Tên nhân viên"
+                            className="form-control"
                             value={this.state.name}
                             valid={errors.name === ""}
                             invalid={errors.name !== ""}
@@ -259,13 +265,15 @@ class StaffList extends Component {
                             invalid={errors.department !== ""}
                             onBlur={this.handleBlur("department")}
                             onChange={this.handleInputChange}
+                            //onChange={this.onChangeDeparment}
                           >
-                            <option value={"op1"}>Sale</option>
-                            <option>HR</option>
-                            <option>Marketing</option>
-                            <option>IT</option>
-                            <option>Finance</option>
+                            <option value="sale">Sale</option>
+                            <option value="hr">HR</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="it">IT</option>
+                            <option value="finance">Finance</option>
                           </Input>
+                          <FormFeedback>{errors.department}</FormFeedback>
                         </Col>
                       </FormGroup>
                       <FormGroup row>
