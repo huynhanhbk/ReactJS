@@ -1,11 +1,17 @@
-import { createStore } from "redux"; //cho phep tao Redux store
-import { Reduceer, initialState } from "./reducer";
+import { createStore, combineReducers } from "redux";
+import { Dishes } from "./dishes";
+import { Comments } from "./comments";
+import { Promotions } from "./promotions";
+import { Leaders } from "./leaders";
 
-//ConfigureStore la bat buoc, la cach dinh cau hinh store cua minh
 export const ConfigureStore = () => {
   const store = createStore(
-    Reduceer, // reducer
-    initialState // our initialState
+    combineReducers({
+      dishes: Dishes,
+      comments: Comments,
+      promotions: Promotions,
+      leaders: Leaders,
+    })
   );
 
   return store;
