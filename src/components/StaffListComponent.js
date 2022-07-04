@@ -38,7 +38,7 @@ class StaffList extends Component {
       doB: "",
       startDate: "",
       department: "Sale",
-      salaryScale: "",
+      salaryScale: "1.0",
       annualLeave: "0",
       overTime: "0",
       touched: {
@@ -56,16 +56,7 @@ class StaffList extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    //this.addStaff = this.addStaff.bind(this);
   }
-
-  // addStaff = (staff) => {
-  //   const id = Math.floor(Math.random() * 10000 + 1);
-  //   const newStaff = { id, ...staff };
-  //   this.setState({
-  //     staffs: [...this.state.staffs, newStaff],
-  //   });
-  // };
 
   //Hàm tìm kiếm nhân viên bằng tên
   handleSearch = (event) => {
@@ -92,6 +83,7 @@ class StaffList extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   }
+
   // Thêm thông tin nhân viên vào state
   handleInputChange(event) {
     const target = event.target;
@@ -108,6 +100,7 @@ class StaffList extends Component {
     });
   };
 
+  //Hàm thêm nhân viên mới
   handleSubmit(event) {
     event.preventDefault();
     const newStaff = {
@@ -138,15 +131,12 @@ class StaffList extends Component {
       !errors.name &&
       !errors.doB &&
       !errors.startDate &&
-      !errors.salaryScale &&
-      !errors.overTime &&
-      !errors.annualLeave &&
       this.state.name.length !== 0
     ) {
       this.props.staffs.push(newStaff);
       this.toggleModal();
     } else {
-      alert("Vui lòng nhập đầy đủ thông tin trước khi Thêm nhân viên mới");
+      alert("Vui lòng nhập đầy đủ thông tin trước khi nhấn Thêm");
     }
   }
 
