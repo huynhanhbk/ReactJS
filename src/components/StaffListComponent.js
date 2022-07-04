@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-//Hàm hiển thị nhân
+//Hàm hiển thị nhân viên
 function RenderMenuStaffs({ staff, onClick }) {
   return (
     <Card>
@@ -39,9 +39,8 @@ class StaffList extends Component {
       startDate: "",
       department: "Sale",
       salaryScale: "",
-      annualLeave: "",
-      overTime: "",
-      image: "/assets/images/alberto.png",
+      annualLeave: "0",
+      overTime: "0",
       touched: {
         name: false,
         doB: false,
@@ -57,17 +56,18 @@ class StaffList extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.addStaff = this.addStaff.bind(this);
+    //this.addStaff = this.addStaff.bind(this);
   }
 
-  addStaff = (staff) => {
-    const id = Math.floor(Math.random() * 10000 + 1);
-    const newStaff = { id, ...staff };
-    this.setState({
-      staffs: [...this.state.staffs, newStaff],
-    });
-  };
+  // addStaff = (staff) => {
+  //   const id = Math.floor(Math.random() * 10000 + 1);
+  //   const newStaff = { id, ...staff };
+  //   this.setState({
+  //     staffs: [...this.state.staffs, newStaff],
+  //   });
+  // };
 
+  //Hàm tìm kiếm nhân viên bằng tên
   handleSearch = (event) => {
     event.preventDefault();
     let currentList = [];
@@ -92,7 +92,7 @@ class StaffList extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   }
-
+  // Thêm thông tin nhân viên vào state
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -109,7 +109,9 @@ class StaffList extends Component {
   };
 
   handleSubmit(event) {
+    event.preventDefault();
     const newStaff = {
+      id: this.props.staffs.length,
       name: this.state.name,
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
@@ -117,10 +119,35 @@ class StaffList extends Component {
       department: { name: this.state.department },
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
-      image: this.state.image,
-      salary: this.state.salary,
+      image: "/assets/images/alberto.png",
+      salary: this.state.salaryScale * 3000000 + this.state.overTime * 200000,
     };
-    this.props.onAdd(newStaff);
+
+    //validate dữ liệu trước khi submit
+    const errors = this.validate(
+      this.state.name,
+      this.state.doB,
+      this.state.startDate,
+      this.state.salaryScale,
+      this.state.department,
+      this.state.annualLeave,
+      this.state.overTime
+    );
+
+    if (
+      !errors.name &&
+      !errors.doB &&
+      !errors.startDate &&
+      !errors.salaryScale &&
+      !errors.overTime &&
+      !errors.annualLeave &&
+      this.state.name.length !== 0
+    ) {
+      this.props.staffs.push(newStaff);
+      this.toggleModal();
+    } else {
+      alert("Vui lòng nhập đầy đủ thông tin trước khi Thêm nhân viên mới");
+    }
   }
 
   validate(

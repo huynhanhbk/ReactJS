@@ -17,16 +17,16 @@ class Main extends Component {
       staffs: STAFFS,
       departments: DEPARTMENTS,
     };
-    this.addStaff = this.addStaff.bind(this);
+    //this.addStaff = this.addStaff.bind(this);
   }
 
-  addStaff = (staff) => {
-    const id = Math.floor(Math.random() * 10000 + 1);
-    const newStaff = { id, ...staff };
-    this.setState({
-      staffs: [...this.state.staffs, newStaff],
-    });
-  };
+  // addStaff = (staff) => {
+  //   const id = Math.floor(Math.random() * 10000 + 1);
+  //   const newStaff = { id, ...staff };
+  //   this.setState({
+  //     staffs: [...this.state.staffs, newStaff],
+  //   });
+  // };
 
   render() {
     const StaffWithId = ({ match }) => {
@@ -49,9 +49,7 @@ class Main extends Component {
           <Route
             exact
             path="/nhanvien"
-            component={() => (
-              <StaffList onAdd={this.addStaff} staffs={this.state.staffs} />
-            )}
+            component={() => <StaffList staffs={this.state.staffs} />}
           />
           <Route path="/nhanvien/:staffId" component={StaffWithId} />
           <Route
