@@ -12,7 +12,6 @@ import {
   ModalBody,
   ModalHeader,
   Row,
-  FormFeedback,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
@@ -34,6 +33,7 @@ class StaffList extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  //Hàm tìm kiếm nhân viên
   handleSearch = (event) => {
     event.preventDefault();
     let currentList = [];
@@ -59,6 +59,7 @@ class StaffList extends Component {
     });
   }
 
+  //hàm thêm nhân viên mới
   handleSubmit(values) {
     const newStaff = {
       id: this.props.staffs.length,
@@ -69,8 +70,8 @@ class StaffList extends Component {
       department: values.department
         ? { name: values.department }
         : { name: "Sale" },
-      annualLeave: values.annualLeave,
-      overTime: values.overTime,
+      annualLeave: values.annualLeave ? values.annualLeave : 0,
+      overTime: values.overTime ? values.overTime : 0,
       image: "/assets/images/alberto.png",
     };
     this.props.staffs.push(newStaff);
@@ -91,7 +92,7 @@ class StaffList extends Component {
           <div className="col-12 col-md-6 mt-3">
             <div className="row">
               <div className="col-8 col-md-8">
-                <h4>Danh Sách Nhân Viên</h4>
+                <h4>Nhân Viên Nâng Cao</h4>
               </div>
               <div className="col-4 col-md-4">
                 <Button onClick={this.toggleModal}>+</Button>
@@ -193,9 +194,6 @@ class StaffList extends Component {
                             id="department"
                             name="department"
                             className="form-control"
-                            validators={{
-                              required,
-                            }}
                           >
                             <option>Sale</option>
                             <option>HR</option>
@@ -203,14 +201,6 @@ class StaffList extends Component {
                             <option>IT</option>
                             <option>Finance</option>
                           </Control.select>
-                          <Errors
-                            className="text-danger"
-                            model=".department"
-                            show="touched"
-                            messages={{
-                              required: "Vui lòng nhập!",
-                            }}
-                          />
                         </Col>
                       </Row>
                       <Row className="form-group">
@@ -344,6 +334,7 @@ class StaffList extends Component {
 
 export default StaffList;
 
+// Hiển thị danh sách nhân viên
 function RenderMenuStaffs({ staff, onClick }) {
   return (
     <Card>

@@ -20,20 +20,7 @@ const mapStateToProps = (state) => {
 class Main extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   staffs: STAFFS,
-    //   departments: DEPARTMENTS,
-    // };
-    //this.addStaff = this.addStaff.bind(this);
   }
-
-  // addStaff = (staff) => {
-  //   const id = Math.floor(Math.random() * 10000 + 1);
-  //   const newStaff = { id, ...staff };
-  //   this.setState({
-  //     staffs: [...this.props.staffs, newStaff],
-  //   });
-  // };
 
   render() {
     const StaffWithId = ({ match }) => {
