@@ -10,11 +10,14 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import DishDetail from "./DishDetailComponent";
 import { connect } from "react-redux";
 import {
-  addComment,
+  postComment,
   fetchDishes,
   fetchComments,
   fetchPromos,
 } from "../redux/ActionCreators";
+//doi addComment thanh postComment, addComment se khong con co the truy cap truc tiep tu MainCompo nua
+//Thay vao do neu muon them nhan xet, ban se dang binh luan, vi vay ta dung postComment. Ban than addComment
+//se duoc postComment su dung de them vao co so du lieu
 
 //import { actions } from "react-redux-form";
 
@@ -32,8 +35,8 @@ const mapStateToProps = (state) => {
 //ta cần ánh xạ nó trong mapDispatchToProps để dispatch dishes trở nên khả dụng cho Main Component mà ta sử dụng. Vì vậy trong Main, ta cần fetch các dishes
 //Vậy ta fetch các dishes ở đâu. Ta nhờ đến lifectycle method là componentDidMount
 const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) =>
-    dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) =>
+    dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => {
     dispatch(fetchDishes());
   },
@@ -94,7 +97,7 @@ class Main extends Component {
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
           commentsErrMess={this.props.comments.errMess}
-          addComment={this.props.addComment}
+          postComment={this.props.postComment}
         />
       );
     };
