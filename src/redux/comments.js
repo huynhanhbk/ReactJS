@@ -22,8 +22,8 @@ export const Comments = (
       };
     case ActionTypes.ADD_COMMENT:
       var comment = action.payload;
-      comment.id = state.comments.length;
-      comment.date = new Date().toISOString();
+      //comment.id = state.comments.length; remove khi them postComment vi id may chu tu cap nhat
+      //comment.date = new Date().toISOString();
       console.log("Comment: ", comment);
       return { ...state, comments: state.comments.concat(comment) };
 
