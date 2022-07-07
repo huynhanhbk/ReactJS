@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { baseUrl } from "../shared/baseUrl";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -39,14 +40,14 @@ class StaffList extends Component {
     let currentList = [];
     let newList = [];
     if (this.search.value !== "") {
-      currentList = this.props.staffs;
+      currentList = this.props.staffs.staffs;
       newList = currentList.filter((item) => {
         return item.name
           .toLowerCase()
           .includes(this.search.value.toLowerCase());
       });
     } else {
-      newList = this.props.staffs;
+      newList = this.props.staffs.staffs;
     }
     this.setState({
       filterArray: newList,
@@ -62,7 +63,7 @@ class StaffList extends Component {
   //hàm thêm nhân viên mới
   handleSubmit(values) {
     const newStaff = {
-      id: this.props.staffs.length,
+      id: this.props.staffs.staffs.length,
       name: values.name,
       doB: values.doB,
       salaryScale: values.salaryScale,
@@ -74,7 +75,7 @@ class StaffList extends Component {
       overTime: values.overTime ? values.overTime : 0,
       image: "/assets/images/alberto.png",
     };
-    this.props.staffs.push(newStaff);
+    this.props.staffs.staffs.push(newStaff);
     this.toggleModal();
   }
 
@@ -327,7 +328,7 @@ class StaffList extends Component {
 
   componentDidMount() {
     this.setState({
-      filterArray: this.props.staffs,
+      filterArray: this.props.staffs.staffs,
     });
   }
 }
@@ -339,7 +340,7 @@ function RenderMenuStaffs({ staff, onClick }) {
   return (
     <Card>
       <Link to={`/nhanvien/${staff.id}`}>
-        <CardImg width="100%" src={staff.image} alt="" />
+        <CardImg width="100%" src={baseUrl + staff.image} alt="" />
         <p className="text-center text-dark">{staff.name}</p>
       </Link>
     </Card>

@@ -9,6 +9,7 @@ import Department from "./DepartmentComponent";
 import Salary from "./SalaryComponent";
 import Home from "./HomeComponent";
 import { connect } from "react-redux";
+import { fetchStaffs } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
   return {
@@ -17,9 +18,19 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchStaffs: () => {
+    dispatch(fetchStaffs());
+  },
+});
+
 class Main extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchStaffs();
   }
 
   render() {
@@ -27,10 +38,12 @@ class Main extends Component {
       return (
         <StaffDetail
           nv={
-            this.props.staffs.filter(
+            this.props.staffs.staffs.filter(
               (staff) => staff.id === parseInt(match.params.staffId, 10)
             )[0]
           }
+          isLoading={this.props.staffs.isLoading}
+          errMess={this.props.staffs.errMess}
         />
       );
     };
@@ -65,7 +78,7 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
 
 // import React, { Component } from "react";
 // import { Redirect, Route, Switch } from "react-router-dom";

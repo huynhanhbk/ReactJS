@@ -13,7 +13,7 @@ function Home() {
                 <p>
                   Môn học: RJS101x_01-A_VN_Lập trình web front end với react
                 </p>
-                <p>Bài tập số: Assignment 4</p>
+                <p>Bài tập số: Assignment 4 - Phần cơ bản</p>
                 <p>Tên dự án: React Component</p>
                 <p>Tác giả: Vũ Ngọc Trung</p>
                 <p>Người thực hiện: Lê Anh Huỳnh</p>
