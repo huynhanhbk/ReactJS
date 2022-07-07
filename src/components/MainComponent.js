@@ -15,6 +15,7 @@ import {
   fetchComments,
   fetchPromos,
 } from "../redux/ActionCreators";
+import { actions } from "react-redux-form";
 //doi addComment thanh postComment, addComment se khong con co the truy cap truc tiep tu MainCompo nua
 //Thay vao do neu muon them nhan xet, ban se dang binh luan, vi vay ta dung postComment. Ban than addComment
 //se duoc postComment su dung de them vao co so du lieu
@@ -45,6 +46,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchPromos: () => {
     dispatch(fetchPromos());
+  },
+  resetFeedbackForm: () => {
+    dispatch(actions.reset("feedback"));
   },
 });
 
@@ -117,7 +121,13 @@ class Main extends Component {
             component={() => <Menu dishes={this.props.dishes} />}
           />
           <Route path="/menu/:dishId" component={DishWithId} />
-          <Route exact path="/contactus" component={Contact} />
+          <Route
+            exact
+            path="/contactus"
+            component={() => (
+              <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+            )}
+          />
           <Redirect to="/home" />
         </Switch>
         <Footer />
