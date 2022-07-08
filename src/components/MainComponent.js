@@ -9,18 +9,29 @@ import Department from "./DepartmentComponent";
 import Salary from "./SalaryComponent";
 import Home from "./HomeComponent";
 import { connect } from "react-redux";
-import { fetchStaffs } from "../redux/ActionCreators";
+import {
+  fetchStaffs,
+  fetchDepartments,
+  fetchSalary,
+} from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
   return {
     staffs: state.staffs,
     departments: state.departments,
+    staffsSalary: state.staffsSalary,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchStaffs: () => {
     dispatch(fetchStaffs());
+  },
+  fetchDepartments: () => {
+    dispatch(fetchDepartments());
+  },
+  fetchSalary: () => {
+    dispatch(fetchSalary());
   },
 });
 
@@ -31,6 +42,8 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchStaffs();
+    this.props.fetchDepartments();
+    this.props.fetchSalary();
   }
 
   render() {
@@ -68,7 +81,7 @@ class Main extends Component {
           />
           <Route
             path="/bangluong"
-            component={() => <Salary staffs={this.props.staffs} />}
+            component={() => <Salary staffsSalary={this.props.staffsSalary} />}
           />
           <Redirect to="/trangchu" />
         </Switch>

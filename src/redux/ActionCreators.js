@@ -40,3 +40,83 @@ export const addStaffs = (staffs) => ({
   type: ActionTypes.ADD_STAFFS,
   payload: staffs,
 });
+
+//fetch phong ban
+export const fetchDepartments = () => (dispatch) => {
+  dispatch(departmentsLoading(true));
+  return fetch(baseUrl + "departments")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error" + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((departments) => dispatch(addDepartments(departments)))
+    .catch((error) => dispatch(departmentsFailed(error.message)));
+};
+
+export const departmentsLoading = () => ({
+  type: ActionTypes.DEPARTS_LOADING,
+});
+
+export const departmentsFailed = (errmess) => ({
+  type: ActionTypes.DEPARTS_FAILED,
+  payload: errmess,
+});
+
+export const addDepartments = (departments) => ({
+  type: ActionTypes.ADD_DEPARTS,
+  payload: departments,
+});
+
+//fetch Bang luong
+export const fetchSalary = () => (dispatch) => {
+  dispatch(salaryLoading(true));
+  return fetch(baseUrl + "staffsSalary")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error" + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((staffsSalary) => dispatch(addSalary(staffsSalary)))
+    .catch((error) => dispatch(salaryFailed(error.message)));
+};
+
+export const salaryLoading = () => ({
+  type: ActionTypes.SALARY_LOADING,
+});
+
+export const salaryFailed = (errmess) => ({
+  type: ActionTypes.SALARY_FAILED,
+  payload: errmess,
+});
+
+export const addSalary = (staffsSalary) => ({
+  type: ActionTypes.ADD_SALARY,
+  payload: staffsSalary,
+});

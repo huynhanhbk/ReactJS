@@ -22,8 +22,7 @@ function RenderSalary({ staff }) {
               <CardText>Số ngày làm thêm: {staff.overTime}</CardText>
             </CardBody>
             <p className="bg-secondary text-white ml-3 mr-3">
-              Lương: {staff.salaryScale * 30000000 + staff.overTime * 2000000}{" "}
-              VNĐ
+              Lương: {staff.salary}
             </p>
           </Card>
         </div>
@@ -45,7 +44,7 @@ class Salary extends Component {
   }
 
   sortByAsc = () => {
-    let currentList = this.props.staffs;
+    let currentList = this.props.staffsSalary.staffsSalary;
     let newList = currentList.sort((a, b) => a.salaryScale - b.salaryScale);
     this.setState({
       sortArray: newList,
@@ -53,7 +52,7 @@ class Salary extends Component {
   };
 
   sortByDesc = () => {
-    let currentList = this.props.staffs;
+    let currentList = this.props.staffsSalary.staffsSalary;
     let newList = currentList.sort((a, b) => b.salaryScale - a.salaryScale);
     this.setState({
       sortArray: newList,
@@ -91,7 +90,7 @@ class Salary extends Component {
 
   componentDidMount() {
     this.setState({
-      sortArray: this.props.staffs,
+      sortArray: this.props.staffsSalary.staffsSalary,
     });
   }
 }

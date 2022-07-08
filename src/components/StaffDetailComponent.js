@@ -9,39 +9,51 @@ import {
   CardTitle,
   CardBody,
 } from "reactstrap";
-
 import dateFormat from "dateformat";
 
 function RenderStaff({ staff }) {
-  if (staff != null) {
-    return (
-      <div className="col-12">
-        <Card>
-          <CardBody>
-            <div className="row">
-              <div className="col-12 col-sm-4 col-md-3">
-                <CardImg width="100%" src={staff.image} alt={staff.name} />
-              </div>
-              <div className="col-12 col-sm-8 col-md-9">
-                <CardTitle>Họ và tên: {staff.name}</CardTitle>
-                <CardText>
-                  Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
-                </CardText>
-                <CardText>
-                  Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
-                </CardText>
-                <CardText>Phòng ban: {staff.department.name}</CardText>
-                <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
-                <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  } else {
-    return <div></div>;
+  switch (staff.departmentId) {
+    case "Dept01":
+      staff.departmentId = "Sale";
+      break;
+    case "Dept02":
+      staff.departmentId = "HR";
+      break;
+    case "Dept03":
+      staff.departmentId = "Marketing";
+      break;
+    case "Dept04":
+      staff.departmentId = "IT";
+      break;
+    case "Dept05":
+      staff.departmentId = "Finance";
+      break;
   }
+  return (
+    <div className="col-12">
+      <Card key={staff.id}>
+        <CardBody>
+          <div className="row">
+            <div className="col-12 col-sm-4 col-md-3">
+              <CardImg width="100%" src={staff.image} alt={staff.name} />
+            </div>
+            <div className="col-12 col-sm-8 col-md-9">
+              <CardTitle>Họ và tên: {staff.name}</CardTitle>
+              <CardText>
+                Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
+              </CardText>
+              <CardText>
+                Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
+              </CardText>
+              <CardText>Phòng ban: {staff.departmentId}</CardText>
+              <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
+              <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    </div>
+  );
 }
 
 function StaffDetail(props) {
