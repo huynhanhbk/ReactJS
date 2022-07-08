@@ -88,7 +88,7 @@ class StaffList extends Component {
       );
     });
     //Kiem tra trang thai state, su dung component Loading
-    if (this.props.staffs.isLoading) {
+    if (this.props.staffLoading) {
       return (
         <div className="container">
           <div className="row">
@@ -96,11 +96,11 @@ class StaffList extends Component {
           </div>
         </div>
       );
-    } else if (this.props.staffs.errMess) {
+    } else if (this.props.staffErrMess) {
       return (
         <div className="container">
           <div className="row">
-            <h4>{this.props.staffs.errMess}</h4>
+            <h4>{this.props.staffErrMess}</h4>
           </div>
         </div>
       );

@@ -3,6 +3,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import StaffList from "./StaffListComponent";
 import StaffDetail from "./StaffDetailComponent";
+import DepartmentDetail from "./DepartmentDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Department from "./DepartmentComponent";
@@ -55,8 +56,23 @@ class Main extends Component {
               (staff) => staff.id === parseInt(match.params.staffId, 10)
             )[0]
           }
-          isLoading={this.props.staffs.isLoading}
-          errMess={this.props.staffs.errMess}
+          staffLoading={this.props.staffs.isLoading}
+          staffErrMess={this.props.staffs.errMess}
+        />
+      );
+    };
+
+    const DepartmentWithId = ({ match }) => {
+      return (
+        <DepartmentDetail
+          staffOfDept={this.props.staffs.staffs.filter(
+            (staff) => staff.departmentId === match.params.departmentId
+          )}
+          // department={
+          //   this.props.departments.departments.filter(
+          //     (department) => department.id === match.params.departmentId
+          //   )[0]
+          // }
         />
       );
     };
@@ -69,16 +85,27 @@ class Main extends Component {
           <Route
             exact
             path="/nhanvien"
-            component={() => <StaffList staffs={this.props.staffs} />}
+            component={() => (
+              <StaffList
+                staffs={this.props.staffs}
+                staffLoading={this.props.staffs.isLoading}
+                staffErrMess={this.props.staffs.errMess}
+              />
+            )}
           />
           <Route path="/nhanvien/:staffId" component={StaffWithId} />
           <Route
             exact
             path="/phongban"
             component={() => (
-              <Department departments={this.props.departments} />
+              <Department
+                departments={this.props.departments}
+                deptLoading={this.props.staffs.isLoading}
+                deptErrMess={this.props.staffs.errMess}
+              />
             )}
           />
+          <Route path="/phongban/:departmentId" component={DepartmentWithId} />
           <Route
             path="/bangluong"
             component={() => <Salary staffsSalary={this.props.staffsSalary} />}

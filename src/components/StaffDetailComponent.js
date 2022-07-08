@@ -10,6 +10,7 @@ import {
   CardBody,
 } from "reactstrap";
 import dateFormat from "dateformat";
+import { Loading } from "./LoadingComponent";
 
 function RenderStaff({ staff }) {
   switch (staff.departmentId) {
@@ -58,8 +59,23 @@ function RenderStaff({ staff }) {
 
 function StaffDetail(props) {
   console.log(props);
-
-  if (props.nv != null) {
+  if (props.staffLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.staffErrMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{props.staffErrMess}</h4>
+        </div>
+      </div>
+    );
+  } else
     return (
       <div className="container">
         <div className="row">
@@ -80,9 +96,6 @@ function StaffDetail(props) {
         <hr />
       </div>
     );
-  } else {
-    return <div></div>;
-  }
 }
 
 export default StaffDetail;

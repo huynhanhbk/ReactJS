@@ -18,12 +18,14 @@ class RenderDepartment extends Component {
     return (
       // <Link>
       <Card>
-        <CardTitle className="ml-1">{this.props.dept.name}</CardTitle>
-        <CardBody>
-          <CardText className="text-dark ml-4">
-            Số lượng nhân viên: {this.props.dept.numberOfStaff}
-          </CardText>
-        </CardBody>
+        <Link to={`/phongban/${this.props.dept.id}`}>
+          <CardTitle className="ml-1">{this.props.dept.name}</CardTitle>
+          <CardBody>
+            <CardText className="text-dark ml-4">
+              Số lượng nhân viên: {this.props.dept.numberOfStaff}
+            </CardText>
+          </CardBody>
+        </Link>
       </Card>
       // </Link>
     );
@@ -33,16 +35,7 @@ class RenderDepartment extends Component {
 class Department extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   departList: [],
-    // };
   }
-
-  // componentDidMount() {
-  //   this.setState({
-  //     departList: this.props.departments.departments,
-  //   });
-  // }
 
   render() {
     const danhsachphongban = this.props.departments.departments.map(
@@ -54,7 +47,7 @@ class Department extends Component {
         );
       }
     );
-    if (this.props.departments.isLoading) {
+    if (this.props.deptLoading) {
       return (
         <div className="container">
           <div className="row">
@@ -62,11 +55,11 @@ class Department extends Component {
           </div>
         </div>
       );
-    } else if (this.props.departments.errMess) {
+    } else if (this.props.deptErrMess) {
       return (
         <div className="container">
           <div className="row">
-            <h4>{this.props.departments.errMess}</h4>
+            <h4>{this.props.deptErrMess}</h4>
           </div>
         </div>
       );
@@ -86,6 +79,7 @@ class Department extends Component {
             </div>
           </div>
           <div className="row">{danhsachphongban}</div>
+          <hr />
         </div>
       );
   }
