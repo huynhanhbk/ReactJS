@@ -23,6 +23,27 @@ const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
 const isNumber = (val) => !isNaN(Number(val));
 
+// Hiển thị danh sách nhân viên
+function RenderMenuStaffs({ staff, removeStaff }) {
+  return (
+    <Card>
+      <Link to={`/nhanvien/${staff.id}`}>
+        <CardImg width="100%" src={staff.image} alt="" />
+        <p className="text-center text-dark">{staff.name}</p>
+      </Link>
+      <Button
+        onClick={() => removeStaff(staff.id)}
+        type="submit"
+        color="warning"
+      >
+        {" "}
+        Xóa
+        {/* <span className="fa fa-trash"></span> */}
+      </Button>
+    </Card>
+  );
+}
+
 class StaffList extends Component {
   constructor(props) {
     super(props);
@@ -368,23 +389,3 @@ class StaffList extends Component {
 }
 
 export default StaffList;
-
-// Hiển thị danh sách nhân viên
-function RenderMenuStaffs({ staff, removeStaff }) {
-  return (
-    <Card>
-      <Link to={`/nhanvien/${staff.id}`}>
-        <CardImg width="100%" src={staff.image} alt="" />
-        <p className="text-center text-dark">{staff.name}</p>
-      </Link>
-      <Button
-        onClick={() => removeStaff(staff.id)}
-        type="submit"
-        color="warning"
-      >
-        Xóa
-        {/* <span className="fa fa-trash"></span> */}
-      </Button>
-    </Card>
-  );
-}

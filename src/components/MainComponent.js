@@ -64,14 +64,20 @@ class Main extends Component {
     const StaffWithId = ({ match }) => {
       return (
         <StaffDetail
-          nv={
+          staff={
             this.props.staffs.staffs.filter(
               (staff) => staff.id === parseInt(match.params.staffId, 10)
             )[0]
           }
           staffLoading={this.props.staffs.isLoading}
           staffErrMess={this.props.staffs.errMess}
-          removeStaff={this.props.removeStaff}
+          patchStaff={this.props.patchStaff}
+          //department={this.props.departments.departments}
+          // department={
+          //   this.props.departments.departments.filter(
+          //     (dept) => dept.id === this.props.staffs.departmentId
+          //   )[0]
+          // }
         />
       );
     };
