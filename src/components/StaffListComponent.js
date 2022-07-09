@@ -16,6 +16,7 @@ import {
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Loading } from "./LoadingComponent";
+import { removeStaff } from "../redux/ActionCreators";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -62,20 +63,30 @@ class StaffList extends Component {
 
   //hàm thêm nhân viên mới
   handleSubmit(values) {
-    const newStaff = {
-      id: this.props.staffs.length,
-      name: values.name,
-      doB: values.doB,
-      salaryScale: values.salaryScale,
-      startDate: values.startDate,
-      department: values.department
-        ? { name: values.department }
-        : { name: "Sale" },
-      annualLeave: values.annualLeave ? values.annualLeave : 0,
-      overTime: values.overTime ? values.overTime : 0,
-      image: "/assets/images/alberto.png",
-    };
-    this.props.staffs.staffs.push(newStaff);
+    // const newStaff = {
+    //   id: this.props.staffs.length,
+    //   name: values.name,
+    //   doB: values.doB,
+    //   salaryScale: values.salaryScale,
+    //   startDate: values.startDate,
+    //   department: values.department
+    //     ? { name: values.department }
+    //     : { name: "Sale" },
+    //   annualLeave: values.annualLeave ? values.annualLeave : 0,
+    //   overTime: values.overTime ? values.overTime : 0,
+    //   image: "/assets/images/alberto.png",
+    // };
+    // this.props.staffs.staffs.push(newStaff);
+
+    this.props.postStaff(
+      values.name,
+      values.doB,
+      values.startDate,
+      values.department,
+      values.salaryScale,
+      values.annualLeave,
+      values.overTime
+    );
     this.toggleModal();
   }
 
@@ -83,7 +94,10 @@ class StaffList extends Component {
     const danhsachnv = this.state.filterArray.map((staff) => {
       return (
         <div key={staff.id} className="col-6 col-sm-4 col-md-2 mt-4">
-          <RenderMenuStaffs staff={staff} />
+          <RenderMenuStaffs
+            staff={staff}
+            removeStaff={this.props.removeStaff}
+          />
         </div>
       );
     });
@@ -356,13 +370,21 @@ class StaffList extends Component {
 export default StaffList;
 
 // Hiển thị danh sách nhân viên
-function RenderMenuStaffs({ staff, onClick }) {
+function RenderMenuStaffs({ staff, removeStaff }) {
   return (
     <Card>
       <Link to={`/nhanvien/${staff.id}`}>
         <CardImg width="100%" src={staff.image} alt="" />
         <p className="text-center text-dark">{staff.name}</p>
       </Link>
+      <Button
+        onClick={() => removeStaff(staff.id)}
+        type="submit"
+        color="warning"
+      >
+        Xóa
+        {/* <span className="fa fa-trash"></span> */}
+      </Button>
     </Card>
   );
 }

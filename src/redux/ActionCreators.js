@@ -1,6 +1,149 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 
+//Them nhan vien moi
+
+export const addStaff = (staff) => ({
+  type: ActionTypes.ADD_STAFF_SUCCESS,
+  payload: staff,
+});
+
+export const postStaff =
+  (name, doB, startDate, department, salaryScale, annualLeave, overTime) =>
+  (dispatch) => {
+    const newStaff = {
+      name: name,
+      doB: doB,
+      startDate: startDate,
+      department: department ? department : "Sale",
+      salaryScale: salaryScale ? salaryScale : 1,
+      annualLeave: annualLeave ? annualLeave : 0,
+      overTime: overTime ? overTime : 0,
+    };
+
+    switch (newStaff.department) {
+      case "Sale":
+        newStaff.departmentId = "Dept01";
+      case "HR":
+        newStaff.departmentId = "Dept02";
+      case "IT":
+        newStaff.departmentId = "Dept03";
+      case "Marketing":
+        newStaff.departmentId = "Dept04";
+      case "Finance":
+        newStaff.departmentId = "Dept05";
+    }
+    newStaff.image = "/assets/images/alberto.png";
+    return fetch(baseUrl + "staffs", {
+      method: "POST",
+      body: JSON.stringify(newStaff),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+    })
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error" + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          var errmess = new Error(error.message);
+          throw errmess;
+        }
+      )
+      .then((response) => response.json())
+      .then((response) => dispatch(addStaff(response)))
+      .catch((error) => {
+        console.log("Add staff", error.message);
+        alert("You could not be add\nError: " + error.message);
+      });
+  };
+
+//xóa nhân viên
+export const deleteStaff = (id) => ({
+  type: ActionTypes.DELETE_STAFF,
+  payload: id,
+});
+
+export const removeStaff = (id) => (dispatch) => {
+  if (window.confirm("Are you sure?")) {
+    return fetch(baseUrl + `staffs/${id}`, {
+      method: "DELETE",
+    })
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error" + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          var errmess = new Error(error.message);
+          throw errmess;
+        }
+      )
+      .then((response) => response.json())
+      .then(() => dispatch(deleteStaff(id)))
+      .catch((error) => {
+        console.log("Delete staff", error.message);
+        alert("You could not be delete\nError: " + error.message);
+      });
+  }
+};
+
+//update nhan vien
+export const updateStaff = (staff) => ({
+  type: ActionTypes.UPDATE_STAFF,
+  payload: staff,
+});
+
+export const patchStaff = (staff) => (dispatch) => {
+  return fetch(baseUrl + "staffs", {
+    method: "PATCH",
+    body: JSON.stringify(staff),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error" + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) => dispatch(updateStaff(response)))
+    .catch((error) => {
+      console.log("Update staff", error.message);
+      alert("You could not be update\nError: " + error.message);
+    });
+};
+
 //fetch Nhan vien
 export const fetchStaffs = () => (dispatch) => {
   dispatch(staffsLoading(true));

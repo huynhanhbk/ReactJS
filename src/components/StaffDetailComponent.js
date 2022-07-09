@@ -8,9 +8,11 @@ import {
   CardText,
   CardTitle,
   CardBody,
+  Button,
 } from "reactstrap";
 import dateFormat from "dateformat";
 import { Loading } from "./LoadingComponent";
+import { patchStaff } from "../redux/ActionCreators";
 
 function RenderStaff({ staff }) {
   switch (staff.departmentId) {
@@ -37,6 +39,15 @@ function RenderStaff({ staff }) {
           <div className="row">
             <div className="col-12 col-sm-4 col-md-3">
               <CardImg width="100%" src={staff.image} alt={staff.name} />
+
+              <Button
+                onClick={() => patchStaff(staff)}
+                className="m-3"
+                type="submit"
+                color="info"
+              >
+                Update
+              </Button>
             </div>
             <div className="col-12 col-sm-8 col-md-9">
               <CardTitle>Họ và tên: {staff.name}</CardTitle>
@@ -91,7 +102,7 @@ function StaffDetail(props) {
           </div>
         </div>
         <div className="row">
-          <RenderStaff staff={props.nv} />
+          <RenderStaff staff={props.nv} patchStaff={props.patchStaff} />
         </div>
         <hr />
       </div>
