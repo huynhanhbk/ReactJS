@@ -12,18 +12,15 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
-  Row,
   Col,
   Label,
+  Form,
+  FormGroup,
+  Input,
 } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import dateFormat from "dateformat";
 import { Loading } from "./LoadingComponent";
-
-const required = (val) => val && val.length;
-const maxLength = (len) => (val) => !val || val.length <= len;
-const minLength = (len) => (val) => val && val.length >= len;
-const isNumber = (val) => !isNaN(Number(val));
 
 class StaffDetail extends Component {
   constructor(props) {
@@ -33,17 +30,20 @@ class StaffDetail extends Component {
     // )[0].name;
     this.state = {
       isModalOpen: false,
-      // id: this.props.staff.id,
-      // name: this.props.staff.name,
-      // doB: dateFormat(this.props.staff.doB, "mm/dd/yyyy"),
-      // startDate: dateFormat(this.props.staff.startDate, "mm/dd/yyyy"),
-      // salaryScale: this.props.staff.salaryScale,
-      // departmentId: this.props.staff.departmentId,
-      // department: department,
-      // annualLeave: this.props.staff.annualLeave,
-      // overTime: this.props.staff.overTime,
+      id: this.props.staff.id,
+      name: this.props.staff.name,
+      doB: dateFormat(this.props.staff.doB, "mm/dd/yyyy"),
+      startDate: dateFormat(this.props.staff.startDate, "mm/dd/yyyy"),
+      salaryScale: this.props.staff.salaryScale,
+      departmentId: this.props.staff.departmentId,
+      //department: department,
+      annualLeave: this.props.staff.annualLeave,
+      overTime: this.props.staff.overTime,
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.RenderStaff = this.RenderStaff.bind(this);
   }
 
   toggleModal() {
@@ -52,19 +52,204 @@ class StaffDetail extends Component {
     });
   }
 
-  handleSubmit(values) {
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
     const update = {
       id: this.state.id,
-      name: values.name,
-      doB: values.doB,
-      startDate: values.startDate,
-      department: values.department,
-      salaryScale: values.salaryScale,
-      annualLeave: values.annualLeave,
-      overTime: values.overTime,
+      name: this.state.name,
+      doB: dateFormat(this.state.doB, "mm/dd/yyyy"),
+      startDate: dateFormat(this.state.startDate, "mm/dd/yyyy"),
+      salaryScale: this.state.salaryScale,
+      departmentId: this.state.departmentId,
+      department: this.state.department,
+      annualLeave: this.state.annualLeave,
+      overTime: this.state.overTime,
     };
     this.props.patchStaff(update);
     this.toggleModal();
+  }
+
+  RenderStaff({ staff }) {
+    switch (staff.departmentId) {
+      case "Dept01":
+        staff.departmentId = "Sale";
+        break;
+      case "Dept02":
+        staff.departmentId = "HR";
+        break;
+      case "Dept03":
+        staff.departmentId = "Marketing";
+        break;
+      case "Dept04":
+        staff.departmentId = "IT";
+        break;
+      case "Dept05":
+        staff.departmentId = "Finance";
+        break;
+    }
+    return (
+      <div className="col-12">
+        <Card key={staff.id}>
+          <CardBody>
+            <div className="row">
+              <div className="col-12 col-sm-4 col-md-3">
+                <CardImg width="100%" src={staff.image} alt={staff.name} />
+              </div>
+              <div className="col-12 col-sm-8 col-md-9">
+                <CardTitle>Họ và tên: {staff.name}</CardTitle>
+                <CardText>
+                  Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
+                </CardText>
+                <CardText>
+                  Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
+                </CardText>
+                <CardText>Phòng ban: {staff.departmentId}</CardText>
+                <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
+                <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+              </div>
+              <Button onClick={this.toggleModal} type="submit" color="primary">
+                <span className="fa fa-pencil"></span> Edit
+              </Button>
+            </div>
+          </CardBody>
+        </Card>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>
+            Sửa thông tin nhân viên
+          </ModalHeader>
+          <ModalBody>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup row>
+                <Label htmlFor="name" sm={4}>
+                  Tên
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Tên"
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label htmlFor="doB" sm={4}>
+                  Ngày sinh
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="date"
+                    id="doB"
+                    name="doB"
+                    placeholder="Ngày sinh"
+                    value={this.state.doB}
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label htmlFor="startDate" sm={4}>
+                  Ngày vào công ty
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="date"
+                    id="startDate"
+                    name="startDate"
+                    placeholder="startDate"
+                    value={this.state.startDate}
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label htmlFor="departmentId" sm={4}>
+                  Phòng ban
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="select"
+                    id="departmentId"
+                    name="departmentId"
+                    value={this.state.departmentId}
+                    onChange={this.handleInputChange}
+                  >
+                    <option value="Dept01">Sale</option>
+                    <option value="Dept02">HR</option>
+                    <option value="Dept03">Marketing</option>
+                    <option value="Dept04">IT</option>
+                    <option value="Dept05">Finance</option>
+                  </Input>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label htmlFor="salaryScale" sm={4}>
+                  Hệ số lương
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="number"
+                    id="salaryScale"
+                    name="salaryScale"
+                    placeholder="1.0 -> 3.0"
+                    value={this.state.salaryScale}
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label htmlFor="annualLeave" sm={4}>
+                  Số ngày nghỉ còn lại
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="number"
+                    id="annualLeave"
+                    name="annualLeave"
+                    placeholder="Số ngày nghỉ còn lại"
+                    value={this.state.annualLeave}
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label htmlFor="overTime" sm={4}>
+                  Số ngày đã làm thêm
+                </Label>
+                <Col sm={8}>
+                  <Input
+                    type="number"
+                    id="overTime"
+                    name="overTime"
+                    placeholder="Số ngày đã làm thêm"
+                    value={this.state.overTime}
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col>
+                  <Button type="submit" color="primary">
+                    Update
+                  </Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </ModalBody>
+        </Modal>
+      </div>
+    );
   }
 
   render() {
@@ -94,207 +279,9 @@ class StaffDetail extends Component {
               </BreadcrumbItem>
               <BreadcrumbItem active>{this.props.staff.name}</BreadcrumbItem>
             </Breadcrumb>
-            <div className="col-12">
-              {/* <h3>{this.props.nv.name}</h3> */}
-              <Button onClick={this.toggleModal}>Cập nhật</Button>
-              <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                <ModalHeader toggle={this.toggleModal}>
-                  Thêm Nhân Viên
-                </ModalHeader>
-                <ModalBody>
-                  <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-                    <Row className="form-group">
-                      <Label htmlFor="name" md={4}>
-                        Tên
-                      </Label>
-                      <Col md={8}>
-                        <Control.text
-                          model=".name"
-                          id="name"
-                          name="name"
-                          placeholder="Tên nhân viên"
-                          className="form-control"
-                          validators={{
-                            required,
-                            minLength: minLength(3),
-                            maxLength: maxLength(30),
-                          }}
-                        />
-                        <Errors
-                          className="text-danger"
-                          model=".name"
-                          show="touched"
-                          messages={{
-                            required: "Vui lòng nhập!",
-                            minLength: "Tên phải lớn hơn 2 kí tự",
-                            maxLength: "Tên phải bé hơn 30 kí tự",
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Label htmlFor="doB" md={4}>
-                        Ngày sinh
-                      </Label>
-                      <Col md={8}>
-                        <Control
-                          model=".doB"
-                          type="date"
-                          id="doB"
-                          name="doB"
-                          className="form-control"
-                          validators={{
-                            required,
-                          }}
-                        />
-                        <Errors
-                          className="text-danger"
-                          model=".doB"
-                          show="touched"
-                          messages={{
-                            required: "Vui lòng nhập!",
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Label htmlFor="startDate" md={4}>
-                        Ngày vào công ty
-                      </Label>
-                      <Col md={8}>
-                        <Control
-                          model=".startDate"
-                          type="date"
-                          id="startDate"
-                          name="startDate"
-                          className="form-control"
-                          validators={{
-                            required,
-                          }}
-                        />
-                        <Errors
-                          className="text-danger"
-                          model=".startDate"
-                          show="touched"
-                          messages={{
-                            required: "Vui lòng nhập!",
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Label htmlFor="department" md={4}>
-                        Phòng ban
-                      </Label>
-                      <Col md={8}>
-                        <Control.select
-                          model=".department"
-                          id="department"
-                          name="department"
-                          className="form-control"
-                        >
-                          <option>Sale</option>
-                          <option>HR</option>
-                          <option>Marketing</option>
-                          <option>IT</option>
-                          <option>Finance</option>
-                        </Control.select>
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Label htmlFor="salaryScale" md={4}>
-                        Hệ số lương
-                      </Label>
-                      <Col md={8}>
-                        <Control.text
-                          model=".salaryScale"
-                          id="salaryScale"
-                          name="salaryScale"
-                          placeholder="1.0 -> 4.0"
-                          className="form-control"
-                          validators={{
-                            required,
-                            isNumber,
-                          }}
-                        />
-                        <Errors
-                          className="text-danger"
-                          model=".salaryScale"
-                          show="touched"
-                          messages={{
-                            required: "Vui lòng nhập!",
-                            isNumber: "Vui lòng nhập 1 số",
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Label htmlFor="annualLeave" md={4}>
-                        Số ngày nghỉ còn lại
-                      </Label>
-                      <Col md={8}>
-                        <Control.text
-                          model=".annualLeave"
-                          id="annualLeave"
-                          name="annualLeave"
-                          className="form-control"
-                          validators={{
-                            required,
-                            isNumber,
-                          }}
-                        />
-                        <Errors
-                          className="text-danger"
-                          model=".annualLeave"
-                          show="touched"
-                          messages={{
-                            required: "Vui lòng nhập!",
-                            isNumber: "Vui lòng nhập 1 số",
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Label htmlFor="overTime" md={4}>
-                        Số ngày đã làm thêm
-                      </Label>
-                      <Col md={8}>
-                        <Control.text
-                          model=".overTime"
-                          id="overTime"
-                          name="overTime"
-                          className="form-control"
-                          validators={{
-                            required,
-                            isNumber,
-                          }}
-                        />
-                        <Errors
-                          className="text-danger"
-                          model=".overTime"
-                          show="touched"
-                          messages={{
-                            required: "Vui lòng nhập!",
-                            isNumber: "Vui lòng nhập 1 số",
-                          }}
-                        />
-                      </Col>
-                    </Row>
-                    <Row className="form-group">
-                      <Col md={{ size: 10, offset: 2 }}>
-                        <Button type="submit" color="primary">
-                          Thêm
-                        </Button>
-                      </Col>
-                    </Row>
-                  </LocalForm>
-                </ModalBody>
-              </Modal>
-              <hr />
-            </div>
           </div>
           <div className="row">
-            <RenderStaff
+            <this.RenderStaff
               staff={this.props.staff} //mac dinh staff={this.props.staff} ko doi
               patchStaff={this.props.patchStaff}
             />
@@ -303,51 +290,6 @@ class StaffDetail extends Component {
         </div>
       );
   }
-}
-
-function RenderStaff({ staff }) {
-  switch (staff.departmentId) {
-    case "Dept01":
-      staff.departmentId = "Sale";
-      break;
-    case "Dept02":
-      staff.departmentId = "HR";
-      break;
-    case "Dept03":
-      staff.departmentId = "Marketing";
-      break;
-    case "Dept04":
-      staff.departmentId = "IT";
-      break;
-    case "Dept05":
-      staff.departmentId = "Finance";
-      break;
-  }
-  return (
-    <div className="col-12">
-      <Card key={staff.id}>
-        <CardBody>
-          <div className="row">
-            <div className="col-12 col-sm-4 col-md-3">
-              <CardImg width="100%" src={staff.image} alt={staff.name} />
-            </div>
-            <div className="col-12 col-sm-8 col-md-9">
-              <CardTitle>Họ và tên: {staff.name}</CardTitle>
-              <CardText>
-                Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}
-              </CardText>
-              <CardText>
-                Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
-              </CardText>
-              <CardText>Phòng ban: {staff.departmentId}</CardText>
-              <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
-              <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
-            </div>
-          </div>
-        </CardBody>
-      </Card>
-    </div>
-  );
 }
 
 export default StaffDetail;

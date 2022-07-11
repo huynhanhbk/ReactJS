@@ -37,8 +37,7 @@ function RenderMenuStaffs({ staff, removeStaff }) {
         color="warning"
       >
         {" "}
-        Xóa
-        {/* <span className="fa fa-trash"></span> */}
+        <span className="fa fa-trash"></span> Delete
       </Button>
     </Card>
   );
@@ -84,21 +83,6 @@ class StaffList extends Component {
 
   //hàm thêm nhân viên mới
   handleSubmit(values) {
-    // const newStaff = {
-    //   id: this.props.staffs.length,
-    //   name: values.name,
-    //   doB: values.doB,
-    //   salaryScale: values.salaryScale,
-    //   startDate: values.startDate,
-    //   department: values.department
-    //     ? { name: values.department }
-    //     : { name: "Sale" },
-    //   annualLeave: values.annualLeave ? values.annualLeave : 0,
-    //   overTime: values.overTime ? values.overTime : 0,
-    //   image: "/assets/images/alberto.png",
-    // };
-    // this.props.staffs.staffs.push(newStaff);
-
     this.props.postStaff(
       values.name,
       values.doB,
@@ -149,7 +133,13 @@ class StaffList extends Component {
                   <h4>Danh Sách Nhân Viên</h4>
                 </div>
                 <div className="col-4 col-md-4">
-                  <Button onClick={this.toggleModal}>+</Button>
+                  <Button
+                    onClick={this.toggleModal}
+                    type="submit"
+                    color="primary"
+                  >
+                    <span className="fa fa-plus"></span>
+                  </Button>
                   <Modal
                     isOpen={this.state.isModalOpen}
                     toggle={this.toggleModal}
@@ -340,7 +330,11 @@ class StaffList extends Component {
                         </Row>
                         <Row className="form-group">
                           <Col md={{ size: 10, offset: 2 }}>
-                            <Button type="submit" color="primary">
+                            <Button
+                              type="submit"
+                              color="primary"
+                              value="submit"
+                            >
                               Thêm
                             </Button>
                           </Col>

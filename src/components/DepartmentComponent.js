@@ -9,14 +9,12 @@ import {
   CardBody,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-//import { baseUrl } from "../shared/baseUrl";
 
 import { Loading } from "./LoadingComponent";
 
 class RenderDepartment extends Component {
   render() {
     return (
-      // <Link>
       <Card>
         <Link to={`/phongban/${this.props.dept.id}`}>
           <CardTitle className="ml-1">{this.props.dept.name}</CardTitle>
@@ -27,7 +25,6 @@ class RenderDepartment extends Component {
           </CardBody>
         </Link>
       </Card>
-      // </Link>
     );
   }
 }

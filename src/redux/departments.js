@@ -23,7 +23,6 @@ export const Departments = (
         ...state,
         isLoading: false,
         errMess: action.payload,
-        departments: [],
       };
     default:
       return state;

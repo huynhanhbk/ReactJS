@@ -8,6 +8,7 @@ import {
   CardBody,
   CardText,
 } from "reactstrap";
+import { Loading } from "./LoadingComponent";
 
 function RenderSalary({ staff }) {
   if (staff != null) {
@@ -67,25 +68,42 @@ class Salary extends Component {
         </div>
       );
     });
-    return (
-      <div className="container">
-        <div className="row">
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to="/nhanvien">Nhân Viên</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
-          </Breadcrumb>
+    if (this.props.salaryLoading) {
+      return (
+        <div className="container">
+          <div className="row">
+            <Loading />
+          </div>
         </div>
-        <button className="btn btn-success mr-3" onClick={this.sortByAsc}>
-          Sắp xếp theo hệ số lương tăng dần
-        </button>
-        <button className="btn btn-danger" onClick={this.sortByDesc}>
-          Sắp xếp theo hệ số lương giảm dần
-        </button>
-        <div className="row">{bangLuong}</div>
-      </div>
-    );
+      );
+    } else if (this.props.salaryErrMess) {
+      return (
+        <div className="container">
+          <div className="row">
+            <h4>{this.props.salaryErrMess}</h4>
+          </div>
+        </div>
+      );
+    } else
+      return (
+        <div className="container">
+          <div className="row">
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="/nhanvien">Nhân Viên</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
+            </Breadcrumb>
+          </div>
+          <button className="btn btn-success mr-3" onClick={this.sortByAsc}>
+            Sắp xếp theo hệ số lương tăng dần
+          </button>
+          <button className="btn btn-danger" onClick={this.sortByDesc}>
+            Sắp xếp theo hệ số lương giảm dần
+          </button>
+          <div className="row">{bangLuong}</div>
+        </div>
+      );
   }
 
   componentDidMount() {

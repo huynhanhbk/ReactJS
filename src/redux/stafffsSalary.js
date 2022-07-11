@@ -23,7 +23,6 @@ export const StaffsSalary = (
         ...state,
         isLoading: false,
         errMess: action.payload,
-        staffsSalary: [],
       };
     default:
       return state;

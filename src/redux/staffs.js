@@ -9,6 +9,13 @@ export const Staffs = (
   action
 ) => {
   switch (action.type) {
+    case ActionTypes.ADD_STAFF_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        errMess: null,
+        staffs: action.payload,
+      };
     case ActionTypes.ADD_STAFFS:
       return {
         ...state,
@@ -24,6 +31,23 @@ export const Staffs = (
         isLoading: false,
         errMess: action.payload,
         staffs: [],
+      };
+    case ActionTypes.UPDATE_STAFF:
+      return {
+        ...state,
+        isLoading: false,
+        errMess: null,
+        staffs: action.payload,
+      };
+    case ActionTypes.DELETE_STAFF:
+      const restStaffs = state.staffs.filter(
+        (staff) => staff.id != action.payload
+      );
+      return {
+        ...state,
+        isLoading: false,
+        errMess: null,
+        staffs: restStaffs,
       };
     default:
       return state;

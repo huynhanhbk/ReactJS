@@ -16,22 +16,29 @@ export const postStaff =
       doB: doB,
       startDate: startDate,
       department: department ? department : "Sale",
-      salaryScale: salaryScale ? salaryScale : 1,
-      annualLeave: annualLeave ? annualLeave : 0,
+      salaryScale: salaryScale,
+      annualLeave: annualLeave,
       overTime: overTime ? overTime : 0,
     };
 
     switch (newStaff.department) {
       case "Sale":
         newStaff.departmentId = "Dept01";
+        break;
       case "HR":
         newStaff.departmentId = "Dept02";
+        break;
       case "IT":
         newStaff.departmentId = "Dept03";
+        break;
       case "Marketing":
         newStaff.departmentId = "Dept04";
+        break;
       case "Finance":
         newStaff.departmentId = "Dept05";
+        break;
+      default:
+        newStaff.departmentId = "Dept01";
     }
     newStaff.image = "/assets/images/alberto.png";
     return fetch(baseUrl + "staffs", {

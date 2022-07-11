@@ -20,7 +20,7 @@ function RenderStaffOfDept({ staff }) {
   );
 }
 
-function DepartmentDetail(props) {
+const DepartmentDetail = (props) => {
   const staffOfDept = props.staffOfDept.map((staff) => {
     return (
       <div key={staff.id} className="col-6 col-sm-4 col-md-2 mt-4">
@@ -52,7 +52,7 @@ function DepartmentDetail(props) {
             <BreadcrumbItem>
               <Link to="/phongban">Phòng Ban</Link>
             </BreadcrumbItem>
-            <BreadcrumbItem active>Phòng</BreadcrumbItem>
+            <BreadcrumbItem active>{props.department.name}</BreadcrumbItem>
           </Breadcrumb>
           <div className="col-12">
             <h3>Danh Sách Nhân Viên</h3>
@@ -64,6 +64,6 @@ function DepartmentDetail(props) {
         <hr />
       </div>
     );
-}
+};
 
 export default DepartmentDetail;
