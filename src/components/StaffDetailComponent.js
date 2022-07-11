@@ -25,9 +25,6 @@ import { Loading } from "./LoadingComponent";
 class StaffDetail extends Component {
   constructor(props) {
     super(props);
-    // const department = this.props.department.filter(
-    //   (dept) => dept.id === this.props.staff.departmentId
-    // )[0].name;
     this.state = {
       isModalOpen: false,
       id: this.props.staff.id,
@@ -36,7 +33,6 @@ class StaffDetail extends Component {
       startDate: dateFormat(this.props.staff.startDate, "mm/dd/yyyy"),
       salaryScale: this.props.staff.salaryScale,
       departmentId: this.props.staff.departmentId,
-      //department: "",
       department: this.props.staff.departmentId,
       annualLeave: this.props.staff.annualLeave,
       overTime: this.props.staff.overTime,
@@ -71,7 +67,6 @@ class StaffDetail extends Component {
       startDate: dateFormat(this.state.startDate, "mm/dd/yyyy"),
       salaryScale: this.state.salaryScale,
       departmentId: this.state.departmentId,
-      //department: this.state.department,
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
     };

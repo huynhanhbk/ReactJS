@@ -38,9 +38,25 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSalary: () => {
     dispatch(fetchSalary());
   },
-  postStaff: (name, doB, startDate, department, annualLeave, overTime) =>
+  postStaff: (
+    name,
+    doB,
+    startDate,
+    department,
+    salaryScale,
+    annualLeave,
+    overTime
+  ) =>
     dispatch(
-      postStaff(name, doB, startDate, department, annualLeave, overTime)
+      postStaff(
+        name,
+        doB,
+        startDate,
+        department,
+        salaryScale,
+        annualLeave,
+        overTime
+      )
     ),
   removeStaff: (id) => {
     dispatch(removeStaff(id));

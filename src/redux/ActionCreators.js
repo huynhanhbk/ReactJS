@@ -18,7 +18,7 @@ export const postStaff =
       department: department ? department : "Sale",
       salaryScale: salaryScale,
       annualLeave: annualLeave,
-      overTime: overTime ? overTime : 0,
+      overTime: overTime,
     };
 
     switch (newStaff.department) {
