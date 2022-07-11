@@ -99,6 +99,14 @@ class StaffDetail extends Component {
             <div className="row">
               <div className="col-12 col-sm-4 col-md-3">
                 <CardImg width="100%" src={staff.image} alt={staff.name} />
+                <Button
+                  className="m-3"
+                  onClick={this.toggleModal}
+                  type="submit"
+                  color="primary"
+                >
+                  <span className="fa fa-pencil"></span> Edit
+                </Button>
               </div>
               <div className="col-12 col-sm-8 col-md-9">
                 <CardTitle>Họ và tên: {staff.name}</CardTitle>
@@ -112,9 +120,6 @@ class StaffDetail extends Component {
                 <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
                 <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
               </div>
-              <Button onClick={this.toggleModal} type="submit" color="primary">
-                <span className="fa fa-pencil"></span> Edit
-              </Button>
             </div>
           </CardBody>
         </Card>

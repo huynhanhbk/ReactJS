@@ -88,7 +88,7 @@ class Main extends Component {
           }
           staffLoading={this.props.staffs.isLoading}
           staffErrMess={this.props.staffs.errMess}
-          department={this.props.departments.departments}
+          //department={this.props.departments.departments}
           patchStaff={this.props.patchStaff}
 
           // department={
