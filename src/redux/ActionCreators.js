@@ -28,10 +28,10 @@ export const postStaff =
       case "HR":
         newStaff.departmentId = "Dept02";
         break;
-      case "IT":
+      case "Marketing":
         newStaff.departmentId = "Dept03";
         break;
-      case "Marketing":
+      case "IT":
         newStaff.departmentId = "Dept04";
         break;
       case "Finance":
