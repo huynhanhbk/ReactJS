@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+//mapDispatchToProps là một hàm kết nối các hành động Redux với các props React. Bằng cách này, một React component được kết nối sẽ có thể gửi messages đến store.
 const mapDispatchToProps = (dispatch) => ({
   fetchStaffs: () => {
     dispatch(fetchStaffs());

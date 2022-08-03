@@ -105,6 +105,7 @@ class StaffList extends Component {
         </div>
       );
     });
+
     //Kiem tra trang thai state, su dung component Loading
     if (this.props.staffLoading) {
       return (
