@@ -4,7 +4,6 @@ import { FoodLabel } from '../menu/FoodGrid';
 
 const Dialog = styled.div`
   width: 500px;
-  height: 1000px;
   background-color: white;
   position: fixed;
   top: 75px;
@@ -38,6 +37,16 @@ const DialogBannerName = styled(FoodLabel)`
   padding: 5px 40px;
 `;
 
+const DialogContent = styled.div`
+  overflow: auto;
+  min-height: 100px;
+`;
+
+const DialogFooter = styled.div`
+  box-shadow: 0px 2px 20px 0px grey;
+  height: 60px;
+`;
+
 export function FoodDialog({ openFood, setOpenFood }) {
   function close() {
     setOpenFood();
@@ -49,6 +58,8 @@ export function FoodDialog({ openFood, setOpenFood }) {
       <Dialog>
         <DialogBanner img={openFood.img} />
         <DialogBannerName>{openFood.name}</DialogBannerName>
+        <DialogContent></DialogContent>
+        <DialogFooter></DialogFooter>
       </Dialog>
     </>
   );

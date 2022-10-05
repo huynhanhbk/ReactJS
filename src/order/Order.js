@@ -8,7 +8,6 @@ const OrderStyled = styled.div`
   width: 340px;
   background-color: white;
   height: calc(100% - 48px);
-  border: 1px solid blue;
   z-index: 10;
   box-shadow: 4px 0px 5px 4px grey;
 `;
