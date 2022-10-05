@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from './navbar/Navbar';
 import { Banner } from './banner/Banner';
 import { Menu } from './menu/Menu';
+import { FoodDialog } from './foodDialog/FoodDialog';
 import { GlobalStyle } from './styles/GlobalStyle';
 
 function App() {
@@ -10,9 +11,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <FoodDialog openFood={openFood} setOpenFood={setOpenFood} />
       <Navbar />
       <Banner />
-      <div>{openFood}</div>
       <Menu setOpenFood={setOpenFood} />
     </>
   );
