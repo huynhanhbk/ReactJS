@@ -5,6 +5,7 @@ import {
   DialogFooter,
   ConfirmButton,
 } from '../foodDialog/FoodDialog';
+import { formatPrice } from '../data/FoodData';
 
 const OrderStyled = styled.div`
   position: fixed;
@@ -31,6 +32,8 @@ const OrderContainer = styled.div`
 
 const OrderItem = styled.div`
   padding: 10px 0px;
+  display: grid;
+  grid-template-columns: 20px 150px 20px 60px;
 `;
 
 export function Order({ orders }) {
@@ -43,7 +46,11 @@ export function Order({ orders }) {
           <OrderContainer>Your order: </OrderContainer>
           {orders.map((order) => (
             <OrderContainer>
-              <OrderItem>{order.name}</OrderItem>
+              <OrderItem>
+                <div>1</div>
+                <div>{order.name}</div>
+                <div>{formatPrice(order.price)}</div>
+                </OrderItem>
             </OrderContainer>
           ))}
         </OrderContent>
