@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from './navbar/Navbar';
 import { Banner } from './banner/Banner';
 import { Menu } from './menu/Menu';
@@ -7,10 +7,12 @@ import { GlobalStyle } from './styles/GlobalStyle';
 import { Order } from './order/Order';
 import { useOpenFood } from './hooks/useOpenFood';
 import { useOrders } from './hooks/useOrders';
+import {useTitle} from './hooks/useTitle';
 
 function App() {
   const openFood = useOpenFood();
   const orders = useOrders();
+  useTitle({...openFood, ...orders});
 
   return (
     <>
