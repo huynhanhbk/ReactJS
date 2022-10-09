@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { pizzaRed } from '../styles/colors';
-import { Title } from '../styles/title';
+import React from "react";
+import styled from "styled-components";
+import { pizzaRed } from "../styles/colors";
+import { Title } from "../styles/title";
 
 const NavbarStyted = styled.div`
   background-color: ${pizzaRed};
@@ -21,7 +21,7 @@ export function Navbar() {
   return (
     <NavbarStyted>
       <Logo>
-        Sliceline{' '}
+        PizzaShopMinMin{" "}
         <span role="img" aria-label="pizza slice">
           🍕
         </span>
