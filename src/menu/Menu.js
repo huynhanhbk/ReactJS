@@ -1,12 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { foods } from '../data/FoodData';
-import { FoodGrid, Food, FoodLabel } from './FoodGrid';
-import { formatPrice } from '../data/FoodData';
+import React from "react";
+import styled from "styled-components";
+import { foods } from "../data/FoodData";
+import { FoodGrid, Food, FoodLabel } from "./FoodGrid";
+import { formatPrice } from "../data/FoodData";
 
 const MenuStyled = styled.div`
-  border: 2px solid black;
-  height: 1000px;
+  height: auto;
   margin: 0px 400px 50px 20px;
 `;
 

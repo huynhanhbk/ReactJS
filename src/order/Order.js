@@ -7,6 +7,7 @@ import {
 } from "../foodDialog/FoodDialog";
 import { formatPrice } from "../data/FoodData";
 import { getPrice } from "../foodDialog/FoodDialog";
+import { Title } from "../styles/title";
 
 const OrderStyled = styled.div`
   position: fixed;
@@ -29,9 +30,19 @@ const OrderContent = styled(DialogContent)`
 const OrderContainer = styled.div`
   padding: 10px 0px;
   border-bottom: 1px solid grey;
+  ${({ editable }) =>
+    editable
+      ? `
+  &:hover{
+    cursor: pointer;
+    background-color: #e7e7e7;
+  }
+  `
+      : `
+  pointer-events: none`}
 `;
 
-const OrderItem = styled.div`
+const OrderItem = styled(Title)`
   padding: 10px 0px;
   display: grid;
   grid-template-columns: 20px 150px 20px 60px;
@@ -42,13 +53,19 @@ const DetailItem = styled.div`
   font-size: 15px;
 `;
 
-export function Order({ orders }) {
+export function Order({ orders, setOrders, setOpenFood }) {
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
 
   const tax = subtotal * 0.07;
   const total = subtotal + tax;
+
+  function deleteItem(index) {
+    const newOrders = [...orders];
+    newOrders.splice(index, 1);
+    setOrders(newOrders);
+  }
 
   return (
     <OrderStyled>
@@ -57,11 +74,24 @@ export function Order({ orders }) {
       ) : (
         <OrderContent>
           <OrderContainer>Your order: </OrderContainer>
-          {orders.map((order) => (
-            <OrderContainer>
-              <OrderItem>
+          {orders.map((order, index) => (
+            <OrderContainer editable>
+              <OrderItem
+                onClick={() => {
+                  setOpenFood({ ...order, index });
+                }}
+              >
                 <div>{order.quantity}</div>
                 <div>{order.name}</div>
+                <div
+                  style={{ cursor: "pointer", color: "red" }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteItem(index);
+                  }}
+                >
+                  X
+                </div>
                 <div>{formatPrice(getPrice(order))}</div>
               </OrderItem>
               <DetailItem>
@@ -85,8 +115,8 @@ export function Order({ orders }) {
             </OrderItem>
             <OrderItem>
               <div />
-              <div>Total: </div>
-              <div>{formatPrice(total)}</div>
+              <div style={{ color: "red" }}>TOTAL: </div>
+              <div style={{ color: "red" }}>{formatPrice(total)}</div>
             </OrderItem>
           </OrderContainer>
         </OrderContent>
