@@ -20,7 +20,7 @@ const Dialog = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 400px) {
+  @media (max-width: 768px) {
     width: 100%;
     left: 0px;
     z-index: 12;

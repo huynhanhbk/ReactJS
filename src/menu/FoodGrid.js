@@ -7,7 +7,7 @@ export const FoodGrid = styled.div`
   gap: 20px;
   margin-bottom: 80px;
 
-  @media (max-width: 400px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 `;

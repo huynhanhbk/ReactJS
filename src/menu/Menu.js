@@ -8,7 +8,7 @@ const MenuStyled = styled.div`
   height: auto;
   margin: 0px 400px 50px 20px;
 
-  @media (max-width: 400px) {
+  @media (max-width: 768px) {
     width: 100%;
     margin: 0px;
   }
