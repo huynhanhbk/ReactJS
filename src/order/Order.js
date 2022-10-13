@@ -21,7 +21,7 @@ const OrderStyled = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 400px) {
+  @media (max-width: 768px) {
     position: relative;
     width: 100%;
   }
