@@ -7,6 +7,11 @@ import { formatPrice } from "../data/FoodData";
 const MenuStyled = styled.div`
   height: auto;
   margin: 0px 400px 50px 20px;
+
+  @media (max-width: 400px) {
+    width: 100%;
+    margin: 0px;
+  }
 `;
 
 export function Menu({ setOpenFood }) {

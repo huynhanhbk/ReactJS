@@ -1,10 +1,15 @@
-import styled from 'styled-components';
-import { Title } from '../styles/title';
+import styled from "styled-components";
+import { Title } from "../styles/title";
 
 export const FoodGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  margin-bottom: 80px;
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const FoodLabel = styled(Title)`

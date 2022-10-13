@@ -19,6 +19,12 @@ const Dialog = styled.div`
   left: calc(50% - 200px);
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 400px) {
+    width: 100%;
+    left: 0px;
+    z-index: 12;
+  }
 `;
 const DialogShadow = styled.div`
   position: fixed;
